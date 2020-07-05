@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title_block %} COVID LIVE {% endblock %}
+{% block body_block%}
+<div class="alert alert-primary" role="alert">Get Your Country's Corona Status</div>
+<form method="POST" class="form-group col-md-6" >
+                  
+    
+    <div class="active-cyan-3 active-cyan-4 mb-4">
+        <input class="form-control" type="text" name="country_name" placeholder="Search" aria-label="Search">
+    </div>
+    {% csrf_token %}
+    <input type="submit" value="Get Country Status" class="btn btn-primary btn-sm">
+    
+</form>
+
+{% if covid_status %}
+   <div class="row"> 
+       <div class="col-sm-6">
+            <div  class="container p-3 my-3 bg-primary text-white">
+                <p>Country Name : {{covid_status.country}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-secondary text-white">
+                <p>Today Cases : {{covid_status.todayCases}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-secondary text-white">
+                <p>Total Cases : {{covid_status.cases}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-success text-white">
+                <p>Total Recovered : {{covid_status.recovered}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-danger text-white">
+                <p>Today Deaths : {{covid_status.todayDeaths}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-info text-white">
+                <p>Total Deaths : {{covid_status.deaths}}</p>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="container p-3 my-3 bg-warning text-white">
+                <p>Active Cases : {{covid_status.active}}</p>
+            </div>
+            <div class="container p-3 my-3 bg-danger text-white">
+                <p>Critical Cases : {{covid_status.critical}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-secondary text-white">
+                <p>Cases Per One Million : {{covid_status.casesPerOneMillion}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-secondary text-white">
+                <p>Deaths Per One Million : {{covid_status.deathsPerOneMillion}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-secondary text-white">
+                <p>Total Tests : {{covid_status.totalTests}}</p>
+            </div>
+            <div  class="container p-3 my-3 bg-secondary text-white">
+                <p>Tests Per One Million : {{covid_status.testsPerOneMillion}}</p>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
